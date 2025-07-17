@@ -1,0 +1,154 @@
+# Kahani<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khooni Kahaniyaan</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background-color: #0a0a0a;
+      color: #f8f8f8;
+    }
+    header {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      background-color: #111;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: crimson;
+      text-shadow: 2px 2px 5px black;
+    }
+    .intro {
+      text-align: center;
+      margin: 2rem;
+    }
+    .btn {
+      background: crimson;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      color: white;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: darkred;
+    }
+    .story {
+      max-width: 800px;
+      margin: 2rem auto;
+      line-height: 1.8;
+      display: none;
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px red;
+      opacity: 0;
+      transition: opacity 2s ease;
+      font-size: 1.1rem;
+    }
+    .typing {
+      white-space: pre-wrap;
+      overflow: hidden;
+      border-right: .15em solid crimson;
+      animation: typing 4s steps(60, end), blink .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: crimson; }
+    }
+    #backToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      background: crimson;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      display: none;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background-color: #111;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgMusic" src="https://www.fesliyanstudios.com/play-mp3/4386" loop></audio>
+  <header>
+    <h1>Khooni Kahaniyaan</h1>
+    <p>Ek kahani jo raat me neend uda degi...</p>
+  </header>
+
+  <div class="intro">
+    <button class="btn" onclick="showStory()">Kahani Padhein</button>
+  </div>
+
+  <div class="story" id="story">
+    <h2>Kale Kamre Ka Raaz</h2>
+    <p class="typing" id="storyText"></p>
+  </div>
+
+  <button id="backToTop" onclick="scrollToTop()">Back to Top</button>
+
+  <footer>
+    Story by Aapka Naam | © 2025
+  </footer>
+
+  <script>
+    const fullStory = `Gaon ke kinaare ek purana haveli tha jisme koi nahi rehta tha. Log kehte the ki
+raat ke 3 baje wahan se cheekhne ki awaaz aati hai. Ek din Ravi ne thaan li ki
+wo uss haveli me jaayega. Raat ke 2:59 par wo andar gaya. Koi awaaz nahi thi...
+jab tak usne andar ka kaala darwaza nahi khola.
+
+Andar andhera tha, sirf ek jhilmilaati roshni jameen par thi. Tabhi peechhe se
+darwaza band ho gaya. Usne palat kar dekha to koi tha... ek aurat... bina chehre ke.
+Uski aankhon se khoon beh raha tha. Aur fir...
+kisi ne uska gala daba diya.
+
+Agli subah haveli ka darwaza khula tha... lekin Ravi kabhi wapas nahi aaya.`;
+
+    function showStory() {
+      const storyEl = document.getElementById("story");
+      const textEl = document.getElementById("storyText");
+      const audio = document.getElementById("bgMusic");
+      let i = 0;
+
+      storyEl.style.display = "block";
+      setTimeout(() => { storyEl.style.opacity = 1; }, 100);
+      audio.play();
+
+      const typer = setInterval(() => {
+        if (i < fullStory.length) {
+          textEl.textContent += fullStory.charAt(i);
+          i++;
+        } else {
+          clearInterval(typer);
+        }
+      }, 35);
+    }
+
+    window.onscroll = function() {
+      document.getElementById("backToTop").style.display = window.scrollY > 300 ? "block" : "none";
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
